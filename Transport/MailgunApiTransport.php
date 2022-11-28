@@ -112,9 +112,7 @@ class MailgunApiTransport extends AbstractApiTransport
         if ($email->getTextBody()) {
             $payload['text'] = $email->getTextBody();
         }
-        if ($html) {
-            $payload['html'] = $html;
-        }
+        
 
         $headersToBypass = ['from', 'to', 'cc', 'bcc', 'subject', 'content-type'];
         foreach ($headers->all() as $name => $header) {
