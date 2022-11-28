@@ -129,7 +129,11 @@ class MailgunApiTransport extends AbstractApiTransport
             }
 
             if ($header instanceof MetadataHeader) {
-                $payload['v:'.$header->getKey()] = $header->getValue();
+                if ($header->getKey() === 'template' || $header->getKey() === 'h:X-Mailgun-Variables') {
+                    $payload[$header->getKey()] = $header->getValue();
+                }else {
+                    $payload['v:'.$header->getKey()] = $header->getValue();
+                }
 
                 continue;
             }
